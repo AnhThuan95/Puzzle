@@ -6,7 +6,7 @@
 </head>
 
 <style>
-    img{
+    img {
         width: 200px;
         height: 280px;
         margin: 0px 0px 0px 0px;
@@ -17,65 +17,55 @@
 
 <h2>Day la tro choi ghep anh</h2>
 <p>Huong dan: Click vao cac anh cho den khi dung.</p>
-<button type="button" onclick="setAnh()">Bat dau!</button>
-<p id="kq"></p>
+<button type="button" onclick="setImages()">Bat dau!</button>
+<p id="kq">&nbsp;</p>
 
-<img id="anh1" src="image/anh1.jpg" onclick="chuyenAnh1()">
-<img id="anh2" src="image/anh2.jpg" onclick="chuyenAnh2()"><br/>
-<img id="anh3" src="image/anh3.jpg" onclick="chuyenAnh3()">
-<img id="anh4" src="image/anh4.jpg" onclick="chuyenAnh4()">
+<img id="anh1" src="image/anh1.jpg" onclick="changeImage('anh1')">
+<img id="anh2" src="image/anh2.jpg" onclick="changeImage('anh2')"><br/>
+<img id="anh3" src="image/anh3.jpg" onclick="changeImage('anh3')">
+<img id="anh4" src="image/anh4.jpg" onclick="changeImage('anh4')">
 
 <script>
-    function setAnh() {
-        document.getElementById("anh1").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        document.getElementById("anh2").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        document.getElementById("anh3").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        document.getElementById("anh4").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-
+    function setImages() {
+        randomImage("anh1");
+        randomImage("anh2");
+        randomImage("anh3");
+        randomImage("anh4");
     }
-    function chuyenAnh1() {
-        document.getElementById("anh1").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        console.log(document.getElementById("anh1").src);
-        console.log(document.getElementById("anh2").src);
-        console.log(document.getElementById("anh3").src);
-        console.log(document.getElementById("anh4").src);
-        check1() ;
-    }
-    function chuyenAnh2() {
-        document.getElementById("anh2").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        console.log(document.getElementById("anh1").src);
-        console.log(document.getElementById("anh2").src);
-        console.log(document.getElementById("anh3").src);
-        console.log(document.getElementById("anh4").src);
-        check1();
-    }
-    function chuyenAnh3() {
-        document.getElementById("anh3").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        console.log(document.getElementById("anh1").src);
-        console.log(document.getElementById("anh2").src);
-        console.log(document.getElementById("anh3").src);
-        console.log(document.getElementById("anh4").src);
-        check1();
-    }
-    function chuyenAnh4() {
-        document.getElementById("anh4").src = "image/anh"+ (Math.floor(Math.random()*4)+1) +".jpg";
-        console.log(document.getElementById("anh1").src);
-        console.log(document.getElementById("anh2").src);
-        console.log(document.getElementById("anh3").src);
-        console.log(document.getElementById("anh4").src);
-        check1();
+    
+    function changeImage(image) {
+        randomImage(image);
+        check();
     }
 
-    function check1() {
-        if (document.getElementById("anh1").src == "image/anh1.jpg"
-            && document.getElementById("anh2").src == "image/anh2.jpg"
-            && document.getElementById("anh3").src == "image/anh3.jpg"
-            && document.getElementById("anh4").src == "image/anh4.jpg"){
-            document.getElementById("kq").innerHTML = "Chuc mung ban da hoan thanh buc tranh!";
+    function randomImage(image) {
+        document.getElementById(image).src = "image/anh" + (Math.floor(Math.random() * 4) + 1) + ".jpg";
+    }
+
+    function check() {
+        if (cutStr("anh1") === "image/anh1.jpg" && cutStr("anh2") === "image/anh2.jpg"
+            && cutStr("anh3") === "image/anh3.jpg" && cutStr("anh4") === "image/anh4.jpg") {
+            document.getElementById("kq").innerHTML = "&nbsp";
+            alert("Chuc mung ban da hoan thanh buc tranh!");
+            //disabledImages();
         } else {
             document.getElementById("kq").innerHTML = "Chua hoan thanh dau, co len ban!"
         }
     }
+
+    function cutStr(image) {
+        let strSrc = document.getElementById(image).src;
+        let str = strSrc.substr(strSrc.length - 14, 14);
+        return str;
+    }
+
+    function disabledImages() {
+        document.getElementById("anh1").disabled = true;
+        document.getElementById("anh2").disabled = true;
+        document.getElementById("anh3").disabled = true;
+        document.getElementById("anh4").disabled = true;
+    }
+
 </script>
 
 </body>
